@@ -6,12 +6,14 @@ import { Navigation } from "@/components/ui/navigation";
 import { useCart } from "@/contexts/CartContext";
 import { mockDishes, categories } from "@/lib/mockData";
 import { Link } from "wouter";
-import { Search, ShoppingCart } from "lucide-react";
+import { Search, ShoppingCart, Heart } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useFavorites } from "@/hooks/useFavorites";
 
 export default function Menu() {
   const { addToCart, getTotalItems } = useCart();
   const { toast } = useToast();
+  const { toggleFavorite, isFavorite } = useFavorites();
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -26,6 +28,14 @@ export default function Menu() {
     toast({
       title: "Added to cart",
       description: `${dish.name} has been added to your cart.`,
+    });
+  };
+
+  const handleToggleFavorite = (dish: any) => {
+    const isAdded = toggleFavorite(dish.id);
+    toast({
+      title: isAdded ? "Added to Favorites" : "Removed from Favorites",
+      description: `${dish.name} ${isAdded ? "added to" : "removed from"} your favorites.`,
     });
   };
 
@@ -81,9 +91,21 @@ export default function Menu() {
                 <CardContent className="p-6">
                   <div className="flex items-start justify-between mb-2">
                     <h3 className="text-xl font-semibold">{dish.name}</h3>
-                    <span className="text-sm text-muted-foreground bg-muted px-2 py-1 rounded">
-                      {dish.category}
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        onClick={() => handleToggleFavorite(dish)}
+                        className="p-1 h-8 w-8"
+                      >
+                        <Heart 
+                          className={`h-4 w-4 ${isFavorite(dish.id) ? 'fill-red-500 text-red-500' : 'text-muted-foreground'}`}
+                        />
+                      </Button>
+                      <span className="text-sm text-muted-foreground bg-muted px-2 py-1 rounded">
+                        {dish.category}
+                      </span>
+                    </div>
                   </div>
                   <p className="text-muted-foreground mb-4 line-clamp-2">{dish.description}</p>
                   <div className="flex items-center mb-4">
