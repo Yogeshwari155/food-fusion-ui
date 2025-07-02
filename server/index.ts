@@ -61,19 +61,27 @@ app.use((req, res, next) => {
   // It is the only port that is not firewalled.
   const port = 5000;
   
+  // Graceful shutdown handling
+  process.on('SIGTERM', () => {
+    log('SIGTERM received, shutting down gracefully');
+    server.close(() => {
+      process.exit(0);
+    });
+  });
+
+  process.on('SIGINT', () => {
+    log('SIGINT received, shutting down gracefully');
+    server.close(() => {
+      process.exit(0);
+    });
+  });
+
   server.on('error', (err: any) => {
     if (err.code === 'EADDRINUSE') {
-      log(`Port ${port} is already in use, trying to restart...`);
-      setTimeout(() => {
-        server.close();
-        server.listen({
-          port,
-          host: "0.0.0.0",
-        }, () => {
-          log(`serving on port ${port}`);
-        });
-      }, 1000);
+      log(`Port ${port} is already in use. Please check if another instance is running.`);
+      process.exit(1);
     } else {
+      log(`Server error: ${err.message}`);
       throw err;
     }
   });
