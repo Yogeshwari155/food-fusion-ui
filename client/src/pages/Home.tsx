@@ -37,12 +37,12 @@ export default function Home() {
               Order from your favorite restaurants and get fresh, hot meals delivered to your door in minutes.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/menu">
+              <Link to="/menu">
                 <Button size="lg" variant="secondary" className="w-full sm:w-auto">
                   Order Now
                 </Button>
               </Link>
-              <Link href="/menu">
+              <Link to="/menu">
                 <Button size="lg" variant="outline" className="w-full sm:w-auto border-white text-white hover:bg-white hover:text-primary">
                   Browse Menu
                 </Button>
