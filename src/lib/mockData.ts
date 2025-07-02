@@ -1,3 +1,5 @@
+import chickenTacosImage from "@/assets/chicken-tacos.jpg";
+
 export interface Dish {
   id: string;
   name: string;
@@ -86,7 +88,7 @@ export const mockDishes: Dish[] = [
     name: "Chicken Tacos",
     description: "Grilled chicken with salsa, lettuce, and cheese in soft tortillas",
     price: 11.99,
-    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=500",
+    image: chickenTacosImage,
     category: "Mexican",
     ingredients: ["Grilled chicken", "Soft tortillas", "Salsa", "Lettuce", "Cheese"],
     rating: 4.6,
