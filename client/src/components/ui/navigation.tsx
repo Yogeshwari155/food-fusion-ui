@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, User, Menu } from "lucide-react";
 import { useState } from "react";
@@ -9,6 +9,7 @@ interface NavigationProps {
 
 export function Navigation({ cartItemsCount = 0 }: NavigationProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [location] = useLocation();
 
   const navItems = [
     { to: "/", label: "Home" },
@@ -22,30 +23,28 @@ export function Navigation({ cartItemsCount = 0 }: NavigationProps) {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <NavLink to="/" className="text-2xl font-bold text-primary">
+          <Link href="/" className="text-2xl font-bold text-primary">
             FoodFusion
-          </NavLink>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <NavLink
+              <Link
                 key={item.to}
-                to={item.to}
-                className={({ isActive }) =>
-                  `text-foreground hover:text-primary transition-colors ${
-                    isActive ? "text-primary font-medium" : ""
-                  }`
-                }
+                href={item.to}
+                className={`text-foreground hover:text-primary transition-colors ${
+                  location === item.to ? "text-primary font-medium" : ""
+                }`}
               >
                 {item.label}
-              </NavLink>
+              </Link>
             ))}
           </div>
 
           {/* Cart and Auth */}
           <div className="flex items-center space-x-4">
-            <NavLink to="/cart">
+            <Link href="/cart">
               <Button variant="outline" size="sm" className="relative">
                 <ShoppingCart className="h-4 w-4" />
                 {cartItemsCount > 0 && (
@@ -54,14 +53,14 @@ export function Navigation({ cartItemsCount = 0 }: NavigationProps) {
                   </span>
                 )}
               </Button>
-            </NavLink>
+            </Link>
             
-            <NavLink to="/login">
+            <Link href="/login">
               <Button variant="ghost" size="sm">
                 <User className="h-4 w-4 mr-2" />
                 Login
               </Button>
-            </NavLink>
+            </Link>
 
             {/* Mobile Menu Button */}
             <Button
@@ -80,18 +79,16 @@ export function Navigation({ cartItemsCount = 0 }: NavigationProps) {
           <div className="md:hidden py-4 border-t border-border">
             <div className="flex flex-col space-y-2">
               {navItems.map((item) => (
-                <NavLink
+                <Link
                   key={item.to}
-                  to={item.to}
-                  className={({ isActive }) =>
-                    `px-4 py-2 text-foreground hover:text-primary transition-colors ${
-                      isActive ? "text-primary font-medium bg-muted" : ""
-                    }`
-                  }
+                  href={item.to}
+                  className={`px-4 py-2 text-foreground hover:text-primary transition-colors ${
+                    location === item.to ? "text-primary font-medium bg-muted" : ""
+                  }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.label}
-                </NavLink>
+                </Link>
               ))}
             </div>
           </div>

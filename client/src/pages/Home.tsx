@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Navigation } from "@/components/ui/navigation";
 import { useCart } from "@/contexts/CartContext";
 import { mockDishes, mockRestaurants } from "@/lib/mockData";
-import { Link } from "react-router-dom";
+import { Link } from "wouter";
 import heroImage from "@/assets/hero-food.jpg";
 
 export default function Home() {
@@ -37,12 +37,12 @@ export default function Home() {
               Order from your favorite restaurants and get fresh, hot meals delivered to your door in minutes.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link to="/menu">
+              <Link href="/menu">
                 <Button size="lg" variant="secondary" className="w-full sm:w-auto">
                   Order Now
                 </Button>
               </Link>
-              <Link to="/menu">
+              <Link href="/menu">
                 <Button size="lg" variant="outline" className="w-full sm:w-auto border-white text-white hover:bg-white hover:text-primary">
                   Browse Menu
                 </Button>

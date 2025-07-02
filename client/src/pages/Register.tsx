@@ -3,11 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
 
 export default function Register() {
-  const navigate = useNavigate();
+  const [, setLocation] = useLocation();
   const { toast } = useToast();
   
   const [formData, setFormData] = useState({
@@ -47,7 +47,7 @@ export default function Register() {
         title: "Account created successfully",
         description: "Welcome to FoodFusion! You can now start ordering.",
       });
-      navigate("/");
+      setLocation("/");
     }, 1000);
   };
 
@@ -120,11 +120,11 @@ export default function Register() {
               <input type="checkbox" className="mt-1 rounded" required />
               <span className="text-muted-foreground">
                 I agree to the{" "}
-                <Link to="/terms" className="text-primary hover:underline">
+                <Link href="/terms" className="text-primary hover:underline">
                   Terms of Service
                 </Link>{" "}
                 and{" "}
-                <Link to="/privacy" className="text-primary hover:underline">
+                <Link href="/privacy" className="text-primary hover:underline">
                   Privacy Policy
                 </Link>
               </span>
@@ -141,13 +141,13 @@ export default function Register() {
           
           <div className="mt-6 text-center text-sm">
             <span className="text-muted-foreground">Already have an account? </span>
-            <Link to="/login" className="text-primary hover:underline">
+            <Link href="/login" className="text-primary hover:underline">
               Sign in
             </Link>
           </div>
           
           <div className="mt-4 text-center">
-            <Link to="/" className="text-muted-foreground hover:text-primary text-sm">
+            <Link href="/" className="text-muted-foreground hover:text-primary text-sm">
               ← Back to Home
             </Link>
           </div>

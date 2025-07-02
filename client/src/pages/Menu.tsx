@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Navigation } from "@/components/ui/navigation";
 import { useCart } from "@/contexts/CartContext";
 import { mockDishes, categories } from "@/lib/mockData";
-import { Link } from "react-router-dom";
+import { Link } from "wouter";
 import { Search, ShoppingCart } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -93,7 +93,7 @@ export default function Menu() {
                   <div className="flex items-center justify-between">
                     <span className="text-2xl font-bold text-primary">${dish.price}</span>
                     <div className="flex gap-2">
-                      <Link to={`/dish/${dish.id}`}>
+                      <Link href={`/dish/${dish.id}`}>
                         <Button variant="outline" size="sm">
                           Details
                         </Button>

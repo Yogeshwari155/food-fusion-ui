@@ -3,11 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
 
 export default function Login() {
-  const navigate = useNavigate();
+  const [, setLocation] = useLocation();
   const { toast } = useToast();
   
   const [formData, setFormData] = useState({
@@ -35,7 +35,7 @@ export default function Login() {
         title: "Login successful",
         description: "Welcome back to FoodFusion!",
       });
-      navigate("/");
+      setLocation("/");
     }, 1000);
   };
 
@@ -83,7 +83,7 @@ export default function Login() {
                 <input type="checkbox" className="rounded" />
                 <span>Remember me</span>
               </label>
-              <Link to="/forgot-password" className="text-primary hover:underline">
+              <Link href="/forgot-password" className="text-primary hover:underline">
                 Forgot password?
               </Link>
             </div>
@@ -99,13 +99,13 @@ export default function Login() {
           
           <div className="mt-6 text-center text-sm">
             <span className="text-muted-foreground">Don't have an account? </span>
-            <Link to="/register" className="text-primary hover:underline">
+            <Link href="/register" className="text-primary hover:underline">
               Sign up
             </Link>
           </div>
           
           <div className="mt-4 text-center">
-            <Link to="/" className="text-muted-foreground hover:text-primary text-sm">
+            <Link href="/" className="text-muted-foreground hover:text-primary text-sm">
               ← Back to Home
             </Link>
           </div>

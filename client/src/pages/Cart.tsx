@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Navigation } from "@/components/ui/navigation";
 import { useCart } from "@/contexts/CartContext";
 import { Minus, Plus, Trash2 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "wouter";
 
 export default function Cart() {
   const { items, updateQuantity, removeFromCart, clearCart, getTotalItems, getTotalPrice } = useCart();
@@ -19,7 +19,7 @@ export default function Cart() {
           <div className="text-center py-12">
             <h1 className="text-3xl font-bold mb-4">Your Cart is Empty</h1>
             <p className="text-muted-foreground mb-8">Add some delicious dishes to get started!</p>
-            <Link to="/menu">
+            <Link href="/menu">
               <Button size="lg">Browse Menu</Button>
             </Link>
           </div>

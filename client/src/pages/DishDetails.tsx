@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useLocation, useRoute } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Navigation } from "@/components/ui/navigation";
@@ -9,13 +9,13 @@ import { ArrowLeft, Minus, Plus, ShoppingCart } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 export default function DishDetails() {
-  const { id } = useParams();
-  const navigate = useNavigate();
+  const [, setLocation] = useLocation();
+  const [match, params] = useRoute("/dish/:id");
   const { addToCart, getTotalItems } = useCart();
   const { toast } = useToast();
   const [quantity, setQuantity] = useState(1);
 
-  const dish = mockDishes.find(d => d.id === id);
+  const dish = mockDishes.find(d => d.id === params?.id);
 
   if (!dish) {
     return (
@@ -23,7 +23,7 @@ export default function DishDetails() {
         <Navigation cartItemsCount={getTotalItems()} />
         <div className="container mx-auto px-4 py-8 text-center">
           <h1 className="text-2xl font-bold mb-4">Dish not found</h1>
-          <Button onClick={() => navigate("/menu")}>Back to Menu</Button>
+          <Button onClick={() => setLocation("/menu")}>Back to Menu</Button>
         </div>
       </div>
     );
@@ -50,7 +50,7 @@ export default function DishDetails() {
       <div className="container mx-auto px-4 py-8">
         <Button 
           variant="ghost" 
-          onClick={() => navigate("/menu")}
+          onClick={() => setLocation("/menu")}
           className="mb-6"
         >
           <ArrowLeft className="h-4 w-4 mr-2" />

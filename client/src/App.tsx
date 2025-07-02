@@ -1,9 +1,10 @@
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { Router, Route, Switch } from "wouter";
 import { CartProvider } from "@/contexts/CartContext";
+import { queryClient } from "@/lib/queryClient";
 import Home from "./pages/Home";
 import Menu from "./pages/Menu";
 import DishDetails from "./pages/DishDetails";
@@ -14,27 +15,25 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
 
-const queryClient = new QueryClient();
-
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <CartProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/menu" element={<Menu />} />
-            <Route path="/dish/:id" element={<DishDetails />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/orders" element={<Orders />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
+        <Router>
+          <Switch>
+            <Route path="/" component={Home} />
+            <Route path="/menu" component={Menu} />
+            <Route path="/dish/:id" component={DishDetails} />
+            <Route path="/cart" component={Cart} />
+            <Route path="/orders" component={Orders} />
+            <Route path="/profile" component={Profile} />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+            <Route component={NotFound} />
+          </Switch>
+        </Router>
       </CartProvider>
     </TooltipProvider>
   </QueryClientProvider>
