@@ -8,14 +8,14 @@ import heroImage from "@/assets/hero-food.jpg";
 
 export default function Home() {
   const { getTotalItems } = useCart();
-  
+
   const featuredDishes = mockDishes.slice(0, 3);
   const featuredRestaurants = mockRestaurants;
 
   return (
     <div className="min-h-screen bg-background">
       <Navigation cartItemsCount={getTotalItems()} />
-      
+
       {/* Hero Section */}
       <section className="relative h-[500px] bg-gradient-to-r from-primary to-warning overflow-hidden">
         <div className="absolute inset-0">
