@@ -29,9 +29,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.post("/api/users", async (req, res) => {
     try {
-      const { username } = req.body;
-      if (!username) {
-        return res.status(400).json({ message: "Username is required" });
+      const { username, password } = req.body;
+      if (!username || !password) {
+        return res.status(400).json({ message: "Username and password are required" });
       }
       
       const existingUser = await storage.getUserByUsername(username);
@@ -39,7 +39,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(409).json({ message: "Username already exists" });
       }
 
-      const user = await storage.createUser({ username });
+      const user = await storage.createUser({ username, password });
       res.status(201).json(user);
     } catch (error) {
       res.status(500).json({ message: "Internal server error" });
