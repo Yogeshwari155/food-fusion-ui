@@ -9,7 +9,6 @@ import Home from "./pages/Home";
 import Menu from "./pages/Menu";
 import DishDetails from "./pages/DishDetails";
 import Cart from "./pages/Cart";
-import Favorites from "./pages/Favorites";
 import Orders from "./pages/Orders";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
@@ -28,7 +27,6 @@ const App = () => (
             <Route path="/menu" component={Menu} />
             <Route path="/dish/:id" component={DishDetails} />
             <Route path="/cart" component={Cart} />
-            <Route path="/favorites" component={Favorites} />
             <Route path="/orders" component={Orders} />
             <Route path="/profile" component={Profile} />
             <Route path="/login" component={Login} />
