@@ -13,6 +13,7 @@ import Orders from "./pages/Orders";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Feedback from "./pages/Feedback";
 import NotFound from "./pages/NotFound";
 
 const App = () => (
@@ -31,6 +32,7 @@ const App = () => (
             <Route path="/profile" component={Profile} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
+            <Route path="/feedback" component={Feedback} />
             <Route component={NotFound} />
           </Switch>
         </Router>

@@ -15,6 +15,7 @@ export function Navigation({ cartItemsCount = 0 }: NavigationProps) {
     { to: "/", label: "Home" },
     { to: "/menu", label: "Menu" },
     { to: "/orders", label: "Orders" },
+    { to: "/feedback", label: "Feedback" },
     { to: "/profile", label: "Profile" },
   ];
 
